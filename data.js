@@ -16,7 +16,7 @@ const users = [
     password: "3105",
     role: "Istri masa depan",
     lokasi: "Masih Disini",
-    gambarProfil: "./img/lala.jpg"
+    gambarProfil: "https://github.com/tams1901/trackingbahanajar/blob/main/img/lala.jpg"
   },
   {
     nama: "Rina Wulandari",
@@ -213,4 +213,5 @@ const trackingData = {
     ]
   }
 };
+
 
