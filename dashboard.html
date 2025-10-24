@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Pemesanan Bahan Ajar UT</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Styling tambahan untuk sidebar navigasi */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #0056b3;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      border-radius: 5px;
+    }
+    .sidebar ul li a:hover {
+      background-color: #004085;
+    }
+    .sidebar ul li ul {
+      margin-left: 20px;
+      display: none; /* Submenu tersembunyi secara default */
+    }
+    .sidebar ul li:hover ul {
+      display: block; /* Tampilkan submenu saat hover */
+    }
+    .main-content {
+      margin-left: 270px; /* Geser konten utama ke kanan untuk memberi ruang sidebar */
+      padding: 20px;
+    }
+    .user-profile {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      overflow: hidden; /* Untuk clear float */
+    }
+    .user-profile h3 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    .user-profile img {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%; /* Membuat gambar bulat seperti avatar */
+      float: right;
+      margin-left: 15px;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .user-profile img {
+        float: none;
+        display: block;
+        margin: 0 auto 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigasi -->
+  <div class="sidebar">
+    <h2>Menu Navigasi</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+      <li><a href="tracking.html">Tracking Pengiriman</a></li>
+      <li>
+        <a href="#">Laporan</a>
+        <ul>
+          <li><a href="#">Monitoring Progress DO Bahan Ajar</a></li>
+          <li><a href="#">Rekap Bahan Ajar</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Histori Transaksi Bahan Ajar</a></li>
+    </ul>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="main-content">
+    <header>
+      <h1>Dashboard Sistem Pemesanan Bahan Ajar</h1>
+    </header>
+    
+    <div id="greeting" class="greeting"></div>
+    
+    <!-- Profil Login -->
+    <div class="user-profile">
+      <img id="userImage" src="https://via.placeholder.com/100x100?text=Default" alt="Gambar Profil">
+      <h3>Profil Login</h3>
+      <p><strong>Nama:</strong> <span id="userNama"></span></p>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+      <p><strong>Role:</strong> <span id="userRole"></span></p>
+      <p><strong>Lokasi:</strong> <span id="userLokasi"></span></p>
+    </div>
+    
+    <p>Selamat datang di dashboard. Pilih Menu Navigasi untuk melanjutkan ke halaman yang diinginkan.</p>
+    <!-- Tambahkan konten dashboard lainnya di sini jika diperlukan, seperti widget atau ringkasan -->
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Fungsi untuk menampilkan data pengguna dari localStorage
+    function displayUserInfo() {
+      const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (storedUser) {
+        document.getElementById('userNama').textContent = storedUser.nama;
+        document.getElementById('userEmail').textContent = storedUser.email;
+        document.getElementById('userRole').textContent = storedUser.role;
+        document.getElementById('userLokasi').textContent = storedUser.lokasi;
+        document.getElementById('userImage').src = storedUser.gambarProfil;
+      } else {
+        // Fallback jika tidak ada data
+        document.getElementById('userNama').textContent = "Tidak ada data";
+        document.getElementById('userEmail').textContent = "Tidak ada data";
+        document.getElementById('userRole').textContent = "Tidak ada data";
+        document.getElementById('userLokasi').textContent = "Tidak ada data";
+        document.getElementById('userImage').src = "https://via.placeholder.com/100x100?text=Default";
+      }
+    }
+
+    // Panggil saat halaman load
+    document.addEventListener('DOMContentLoaded', function() {
+      displayUserInfo();
+    });
+  </script>
+</body>
+</html>

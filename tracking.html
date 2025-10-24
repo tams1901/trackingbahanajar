@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracking Pengiriman - Pemesanan Bahan Ajar UT</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Styling tambahan untuk sidebar navigasi */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #0056b3;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      border-radius: 5px;
+    }
+    .sidebar ul li a:hover {
+      background-color: #004085;
+    }
+    .sidebar ul li ul {
+      margin-left: 20px;
+      display: none; /* Submenu tersembunyi secara default */
+    }
+    .sidebar ul li:hover ul {
+      display: block; /* Tampilkan submenu saat hover */
+    }
+    .main-content {
+      margin-left: 270px; /* Geser konten utama ke kanan untuk memberi ruang sidebar */
+      padding: 20px;
+    }
+    /* Styling tambahan untuk tabel responsif */
+    .table-container {
+      overflow-x: auto; /* Scroll horizontal jika tabel terlalu lebar */
+    }
+    .table th, .table td {
+      white-space: nowrap; /* Mencegah teks wrap agar tabel tetap rapi */
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+    .progress-fill {
+      height: 20px;
+      background-color: #007bff;
+      border-radius: 5px;
+    }
+    .tracking-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    .tracking-table th, .tracking-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .tracking-table th {
+      background-color: #f2f2f2;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigasi -->
+  <div class="sidebar">
+    <h2>Menu Navigasi</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="tracking.html">Tracking Pengiriman</a></li>
+      <li><a href="stok.html">Informasi Stok Bahan Ajar</a></li>
+      <li>
+        <a href="#">Laporan</a>
+        <ul>
+          <li><a href="#">Monitoring Progress DO Bahan Ajar</a></li>
+          <li><a href="#">Rekap Bahan Ajar</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Histori Transaksi Bahan Ajar</a></li>
+    </ul>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="main-content">
+    <header>
+      <h1>Tracking Pengiriman Bahan Ajar</h1>
+    </header>
+    <div class="container">
+      <!-- Form Pencarian -->
+      <div class="form-group">
+        <label for="trackingCode">Masukkan Kode Tracking (Nomor DO):</label>
+        <input type="text" id="trackingCode" placeholder=" " required>
+        <button id="searchBtn">Cari</button>
+      </div>
+
+      <!-- Detail Hasil Pencarian -->
+      <div id="result" style="display: none;">
+        <h3>Detail Tracking</h3>
+        <p><strong>Nomor DO:</strong> <span id="nomorDO"></span></p>
+        <p><strong>Nama:</strong> <span id="nama"></span></p>
+        <p><strong>Status:</strong> <span id="status"></span></p>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <p><strong>Ekspedisi:</strong> <span id="ekspedisi"></span></p>
+        <p><strong>Tanggal Kirim:</strong> <span id="tanggal"></span></p>
+        <p><strong>Paket:</strong> <span id="paket"></span></p>
+        <p><strong>Total:</strong> <span id="total"></span></p>
+        <h4>Rincian Perjalanan Tracking</h4>
+        <table class="tracking-table" id="timeTable">
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody id="timeBody">
+            <!-- Data akan diisi oleh JS -->
+          </tbody>
+        </table>
+        <button id="backBtn" style="margin-top: 20px;">Kembali</button>
+      </div>
+
+      <!-- Tabel Ringkasan Semua Tracking -->
+      <div id="summarySection">
+        <h3>Ringkasan Semua Tracking</h3>
+        <div class="table-container">
+          <table class="table" id="trackingTable">
+            <thead>
+              <tr>
+                <th>Nomor DO</th>
+                <th>Nama</th>
+                <th>Status</th>
+                <th>Ekspedisi</th>
+                <th>Tanggal Kirim</th>
+                <th>Paket</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody id="trackingBody">
+              <!-- Data akan diisi oleh JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="data.js"></script>
+  <script>
+    // Fungsi untuk render tabel ringkasan
+    function renderTrackingTable() {
+      const tbody = document.getElementById('trackingBody');
+      tbody.innerHTML = '';
+      Object.keys(trackingData).forEach(doNumber => {
+        const item = trackingData[doNumber];
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.nomorDO || doNumber}</td>
+          <td>${item.nama}</td>
+          <td>${item.status}</td>
+          <td>${item.ekspedisi}</td>
+          <td>${item.tanggalKirim}</td>
+          <td>${item.paket}</td>
+          <td>${item.total || item.totalHarga}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // Fungsi untuk render tabel waktu dari array perjalanan
+    function renderTimeTable(perjalanan) {
+      const tbody = document.getElementById('timeBody');
+      tbody.innerHTML = '';
+      if (perjalanan && Array.isArray(perjalanan)) {
+        perjalanan.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${item.waktu}</td><td>${item.keterangan}</td>`;
+          tbody.appendChild(row);
+        });
+      }
+    }
+
+    // Logika pencarian
+    document.getElementById('searchBtn').addEventListener('click', function() {
+      const trackingCode = document.getElementById('trackingCode').value.trim();
+      if (trackingCode === '') {
+        document.getElementById('summarySection').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        return;
+      }
+      const data = trackingData[trackingCode];
+      if (data) {
+        document.getElementById('summarySection').style.display = 'none';
+        document.getElementById('nomorDO').textContent = data.nomorDO || trackingCode;
+        document.getElementById('nama').textContent = data.nama;
+        document.getElementById('status').textContent = data.status;
+        document.getElementById('progressFill').style.width = data.progress ? data.progress + '%' : '50%'; // Default jika tidak ada
+        document.getElementById('ekspedisi').textContent = data.ekspedisi;
+        document.getElementById('tanggal').textContent = data.tanggalKirim;
+        document.getElementById('paket').textContent = data.paket;
+        document.getElementById('total').textContent = data.total || data.totalHarga;
+        renderTimeTable(data.perjalanan);
+        document.getElementById('result').style.display = 'block';
+      } else {
+        alert('Kode tracking tidak ditemukan.');
+        document.getElementById('result').style.display = 'none';
+        document.getElementById('summarySection').style.display = 'block';
+      }
+    });
+
+    // Logika tombol kembali
+    document.getElementById('backBtn').addEventListener('click', function() {
+      document.getElementById('summarySection').style.display = 'block';
+      document.getElementById('result').style.display = 'none';
+    });
+
+    // Render tabel awal
+    renderTrackingTable();
+  </script>
+</body>
+</html>

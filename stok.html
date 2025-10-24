@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stok Bahan Ajar - Pemesanan Bahan Ajar UT</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Styling tambahan untuk sidebar navigasi */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #0056b3;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      border-radius: 5px;
+    }
+    .sidebar ul li a:hover {
+      background-color: #004085;
+    }
+    .sidebar ul li ul {
+      margin-left: 20px;
+      display: none; /* Submenu tersembunyi secara default */
+    }
+    .sidebar ul li:hover ul {
+      display: block; /* Tampilkan submenu saat hover */
+    }
+    .main-content {
+      margin-left: 270px; /* Geser konten utama ke kanan untuk memberi ruang sidebar */
+      padding: 20px;
+    }
+    /* Styling tambahan untuk tabel responsif dan gambar */
+    .table-container {
+      overflow-x: auto; /* Scroll horizontal jika tabel terlalu lebar */
+    }
+    .table th, .table td {
+      white-space: nowrap; /* Mencegah teks wrap agar tabel tetap rapi */
+    }
+    .table img {
+      width: 100px; 
+      height: 140px; 
+      object-fit: cover; 
+      border-radius: 5px; 
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigasi -->
+  <div class="sidebar">
+    <h2>Menu Navigasi</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="tracking.html">Tracking Pengiriman</a></li>
+      <li><a href="stok.html">Informasi Stok Bahan Ajar</a></li>
+      <li>
+        <a href="#">Laporan</a>
+        <ul>
+          <li><a href="#">Monitoring Progress DO Bahan Ajar</a></li>
+          <li><a href="#">Rekap Bahan Ajar</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Histori Transaksi Bahan Ajar</a></li>
+    </ul>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="main-content">
+    <header>
+      <h1>Informasi Stok Bahan Ajar</h1>
+    </header>
+    <div class="container">
+      <div class="table-container">
+        <table class="table" id="stokTable">
+          <thead>
+            <tr>
+              <th>Kode Lokasi</th>
+              <th>Kode Barang</th>
+              <th>Nama Barang</th>
+              <th>Jenis Barang</th>
+              <th>Edisi</th>
+              <th>Stok</th>
+              <th>Gambar Cover</th>
+            </tr>
+          </thead>
+          <tbody id="stokBody">
+            <!-- Data akan diisi oleh JS -->
+          </tbody>
+        </table>
+      </div>
+      <button id="addRowBtn">Tambah Baris Stok</button>
+    </div>
+  </div>
+  <script src="data.js"></script>
+  <script>
+    // Fungsi untuk render tabel
+    function renderTable() {
+      const tbody = document.getElementById('stokBody');
+      tbody.innerHTML = '';
+      dataBahanAjar.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.kodeLokasi}</td>
+          <td>${item.kodeBarang}</td>
+          <td>${item.namaBarang}</td>
+          <td>${item.jenisBarang}</td>
+          <td>${item.edisi}</td>
+          <td>${item.stok}</td>
+          <td><img src="${item.gambarCover}" alt="Cover ${item.namaBarang}"></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // Tambah baris baru dengan input untuk semua kolom, termasuk gambarCover
+    document.getElementById('addRowBtn').addEventListener('click', function() {
+      const kodeLokasi = prompt('Kode Lokasi:');
+      const kodeBarang = prompt('Kode Barang:');
+      const namaBarang = prompt('Nama Barang:');
+      const jenisBarang = prompt('Jenis Barang:');
+      const edisi = prompt('Edisi:');
+      const stok = prompt('Stok:');
+      const gambarCover = prompt('URL Gambar Cover (misalnya: https://example.com/image.jpg):');
+      
+      if (kodeLokasi && kodeBarang && namaBarang && jenisBarang && edisi && stok && gambarCover) {
+        dataBahanAjar.push({
+          kodeLokasi,
+          kodeBarang,
+          namaBarang,
+          jenisBarang,
+          edisi,
+          stok: parseInt(stok),
+          gambarCover
+        });
+        renderTable();
+      } else {
+        alert('Semua kolom harus diisi!');
+      }
+    });
+
+    // Render awal
+    renderTable();
+  </script>
+</body>
+</html>
