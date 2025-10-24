@@ -8,7 +8,7 @@ const users = [
     password: "1901",
     role: "Administrator",
     lokasi: "Universitas Terbuka Jakarta",
-    gambarProfil: "./img/esber.jpg"
+    gambarProfil: "https://github.com/tams1901/trackingbahanajar/blob/main/img/esber.jpg"
   },
   {
     nama: "Devira Cantik",
@@ -213,3 +213,4 @@ const trackingData = {
     ]
   }
 };
+
