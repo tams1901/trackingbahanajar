@@ -69,7 +69,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "1",
     stok: 278,
-    gambarCover: "./img/kepemimpinan.jpg"
+    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/kepemimpinan.jpg"
   },
   {
     kodeLokasi: "0TMP01",
@@ -78,7 +78,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "2",
     stok: 548,
-    gambarCover: "./img/pengantar_komunikasi.jpg"
+    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/pengantar_komunikasi.jpg"
   },
   {
     kodeLokasi: "0JKT01",
@@ -87,7 +87,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "3",
     stok: 392,
-    gambarCover: "./img/manajemen_keuangan.jpg"
+    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/manajemen_keuangan.jpg"
   },
   {
     kodeLokasi: "0MLG01",
@@ -96,7 +96,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "2",
     stok: 165,
-    gambarCover: "./img/mikrobiologi.jpg"
+    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/mikrobiologi.jpg"
   },
   {
     kodeLokasi: "0UPBJJBDG",
@@ -105,7 +105,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "4",
     stok: 204,
-    gambarCover: "./img/PAUD450302.jpg"
+    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/PAUD450302.jpg"
   },
   {
     kodeLokasi: "Devira",
@@ -114,7 +114,7 @@ const dataBahanAjar = [
     jenisBarang: "Foto",
     edisi: "1",
     stok: 1,
-    gambarCover: "./img/dev.jpg"
+    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/dev.jpg"
   }
 ];
 
@@ -213,5 +213,6 @@ const trackingData = {
     ]
   }
 };
+
 
 
