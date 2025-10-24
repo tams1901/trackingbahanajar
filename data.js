@@ -8,7 +8,7 @@ const users = [
     password: "1901",
     role: "Administrator",
     lokasi: "Universitas Terbuka Jakarta",
-    gambarProfil: "https://github.com/tams1901/trackingbahanajar/blob/main/img/esber.jpg"
+    gambarProfil: "img/esber.jpg"
   },
   {
     nama: "Devira Cantik",
@@ -16,7 +16,7 @@ const users = [
     password: "3105",
     role: "Istri masa depan",
     lokasi: "Masih Disini",
-    gambarProfil: "https://github.com/tams1901/trackingbahanajar/blob/main/img/lala.jpg"
+    gambarProfil: "img/lala.jpg"
   },
   {
     nama: "Rina Wulandari",
@@ -69,7 +69,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "1",
     stok: 278,
-    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/kepemimpinan.jpg"
+    gambarCover: "img/kepemimpinan.jpg"
   },
   {
     kodeLokasi: "0TMP01",
@@ -78,7 +78,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "2",
     stok: 548,
-    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/pengantar_komunikasi.jpg"
+    gambarCover: "img/pengantar_komunikasi.jpg"
   },
   {
     kodeLokasi: "0JKT01",
@@ -87,7 +87,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "3",
     stok: 392,
-    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/manajemen_keuangan.jpg"
+    gambarCover: "img/manajemen_keuangan.jpg"
   },
   {
     kodeLokasi: "0MLG01",
@@ -96,7 +96,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "2",
     stok: 165,
-    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/mikrobiologi.jpg"
+    gambarCover: "img/mikrobiologi.jpg"
   },
   {
     kodeLokasi: "0UPBJJBDG",
@@ -105,7 +105,7 @@ const dataBahanAjar = [
     jenisBarang: "BMP",
     edisi: "4",
     stok: 204,
-    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/PAUD450302.jpg"
+    gambarCover: "img/PAUD450302.jpg"
   },
   {
     kodeLokasi: "Devira",
@@ -114,7 +114,7 @@ const dataBahanAjar = [
     jenisBarang: "Foto",
     edisi: "1",
     stok: 1,
-    gambarCover: "https://github.com/tams1901/trackingbahanajar/blob/main/img/dev.jpg"
+    gambarCover: "img/dev.jpg"
   }
 ];
 
@@ -213,6 +213,7 @@ const trackingData = {
     ]
   }
 };
+
 
 
 
